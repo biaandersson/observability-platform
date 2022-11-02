@@ -12,7 +12,7 @@ resource "aws_internet_gateway" "mtc_internet_gateway" {
   vpc_id = aws_vpc.mtc_vpc.id
 
   tags = {
-    Name = "mtc-internet-gateway"
+    Name = "mtc-igw"
   }
 }
 

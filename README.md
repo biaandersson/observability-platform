@@ -41,21 +41,40 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
+What software you need to install, in order to completly run this observability platform.
 
-```
-Ansible   -> [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-AWS CLI   -> [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
-Terraform -> [Terraform CLI](https://www.terraform.io/downloads.html)
-```
+[Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) -
+Ansible is an open-source software provisioning, configuration management, and application-deployment tool enabling infrastructure as code.
+
+[AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) -
+The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services.
+
+[Terraform CLI](https://www.terraform.io/downloads.html) -
+Terraform is an open-source infrastructure as code software tool created by HashiCorp.
+
+[Terraform Cloud](https://www.terraform.io/docs/cloud/index.html) -
+Terraform Cloud is a SaaS offering from HashiCorp that provides a collaborative, web-based UI for Terraform.
 
 ## 🎈 Usage <a name="usage"></a>
 
-Add notes about how to use the system.
+After you have installed all the prerequisites.
+You'll need to initialize Terraform Cloud workspace with Terraform CLI,
+and also set up your AWS CLI credentials.
+
+```bash
+aws configure # Configure your AWS CLI
+terraform login # Login to Terraform Cloud
+```
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
-Add additional notes about how to deploy this on a live system.
+You can deploy this observability platform with the following commands:
+
+```bash
+terraform init # Initialize Terraform
+terraform plan # Plan Terraform
+terraform apply # Apply Terraform
+```
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -70,6 +89,11 @@ Add additional notes about how to deploy this on a live system.
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
-- Hat tip to anyone whose code was used
 - Inspiration
+I've used this project as a learning project to learn even more about Terraform, AWS, and Ansible.
+Since these are the tools I use at work, I wanted to learn more about them. Setting it up with Terraform Cloud was also a fun challenge.
+
 - References
+I've used the following references to create this project:
+- [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
+- [morethancertified](https://courses.morethancertified.com)
