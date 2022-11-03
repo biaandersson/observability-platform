@@ -2,6 +2,12 @@ resource "random_id" "random" {
   byte_length = 2
 }
 
+data "aws_availability_zone" "availability" {
+  count = length(var.availability_zones)
+  name  = var.availability_zones[count.index]
+  state = "available"
+}
+
 resource "aws_vpc" "mtc_vpc" {
   cidr_block           = var.vpc_cidr
   enable_dns_support   = true
@@ -43,6 +49,30 @@ resource "aws_default_route_table" "mtc_private_route_table" {
 
   tags = {
     Name = "mtc-private"
+  }
+}
+
+resource "aws_subnet" "mtc_public_subnet" {
+  availability_zone       = data.aws_availability_zone.availability[count.index].name
+  cidr_block              = var.public_cidrs[count.index]
+  count                   = length(var.public_cidrs)
+  vpc_id                  = aws_vpc.mtc_vpc.id
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "mtc-public-${count.index + 1}"
+  }
+}
+
+resource "aws_subnet" "mtc_private_subnet" {
+  availability_zone       = data.aws_availability_zone.availability[count.index].name
+  cidr_block              = var.private_cidrs[count.index]
+  count                   = length(var.private_cidrs)
+  vpc_id                  = aws_vpc.mtc_vpc.id
+  map_public_ip_on_launch = false
+
+  tags = {
+    Name = "mtc-private-${count.index + 1}"
   }
 }
 
