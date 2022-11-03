@@ -2,6 +2,10 @@ resource "random_id" "random" {
   byte_length = 2
 }
 
+locals {
+  azs = data.aws_availability_zone.availability.*.name
+}
+
 data "aws_availability_zone" "availability" {
   count = length(var.availability_zones)
   name  = var.availability_zones[count.index]
@@ -53,10 +57,10 @@ resource "aws_default_route_table" "mtc_private_route_table" {
 }
 
 resource "aws_subnet" "mtc_public_subnet" {
-  availability_zone       = data.aws_availability_zone.availability[count.index].name
-  cidr_block              = var.public_cidrs[count.index]
-  count                   = length(var.public_cidrs)
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, count.index)
+  availability_zone       = local.azs[count.index]
   vpc_id                  = aws_vpc.mtc_vpc.id
+  count                   = length(local.azs)
   map_public_ip_on_launch = true
 
   tags = {
@@ -65,10 +69,10 @@ resource "aws_subnet" "mtc_public_subnet" {
 }
 
 resource "aws_subnet" "mtc_private_subnet" {
-  availability_zone       = data.aws_availability_zone.availability[count.index].name
-  cidr_block              = var.private_cidrs[count.index]
-  count                   = length(var.private_cidrs)
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, length(local.azs) + count.index)
+  availability_zone       = local.azs[count.index]
   vpc_id                  = aws_vpc.mtc_vpc.id
+  count                   = length(local.azs)
   map_public_ip_on_launch = false
 
   tags = {
@@ -76,3 +80,8 @@ resource "aws_subnet" "mtc_private_subnet" {
   }
 }
 
+resource "aws_route_table_association" "mtc_public_assoc" {
+  subnet_id      = aws_subnet.mtc_public_subnet.*.id[count.index]
+  route_table_id = aws_route_table.mtc_public_route_table.id
+  count          = length(local.azs)
+}
