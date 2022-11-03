@@ -4,20 +4,29 @@ variable "vpc_cidr" {
   type        = string
 }
 
-variable "public_cidrs" {
-  type        = list(string)
-  description = "CIDR block for the public subnet"
-  default     = ["10.123.1.0/24", "10.123.2.0/24"]
-}
-
-variable "private_cidrs" {
-  type        = list(string)
-  description = "CIDR block for the private subnet"
-  default     = ["10.123.3.0/24", "10.123.4.0/24"]
-}
-
 variable "availability_zones" {
   type        = list(string)
   description = "Availability zones for the public subnet"
   default     = ["eu-north-1a", "eu-north-1b"]
+}
+
+variable "access_ip" {
+  description = "IP address to allow access to the bastion host"
+  default     = ["213.113.67.149/32"]
+  type        = list(string)
+}
+
+variable "instance_type" {
+  type    = string
+  default = "t3.micro"
+}
+
+variable "key_name" {
+  type    = string
+  default = "my-key"
+}
+
+variable "main_vol_size" {
+  type    = number
+  default = 8
 }
