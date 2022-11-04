@@ -15,9 +15,7 @@
 
 ---
 
-<p align="center"> An observability platform with Terraform, AWS, Prometheus, and Ansible.
-    </br>
-</p>
+<p align="center"> An observability platform with Terraform, AWS, Prometheus, and Ansible.</p>
 
 ## 📝 Table of Contents
 
@@ -31,20 +29,22 @@
 
 ## 🧐 About <a name = "about"></a>
 
-It's an Prometheus and Grafana Observability platform in AWS Cloud coded with Terraform!
+It's a Grafana Observability platform in AWS Cloud written in Terraform!
 
-Software used is Terraform, Ansible, Jenkins, Git, AWS Cloud, Prometheus, Grafana, and Terraform Cloud.
+Software used is Terraform, Ansible, Jenkins, Git, AWS Cloud, Grafana, and Terraform Cloud.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing
+purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
 What software you need to install, in order to completly run this observability platform.
 
 [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) -
-Ansible is an open-source software provisioning, configuration management, and application-deployment tool enabling infrastructure as code.
+Ansible is an open-source software provisioning, configuration management, and application-deployment tool enabling
+infrastructure as code.
 
 [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) -
 The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services.
@@ -78,22 +78,13 @@ terraform apply # Apply Terraform
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
+- [Jenkins](https://www.jenkins.io/) - CI/CD
 - [AWSCloud](https://aws.amazon.com/) - Cloud
 - [Terraform](https://www.terraform.io/) - Infrastructure as Code
-- [Jenkins](https://www.jenkins.io/) - CI/CD
 - [Ansible](https://www.ansible.com/) - Configuration Management
 
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@biaandersson](https://github.com/biaandersson) - Idea & Initial work
+- [ComeOn Group!](https://comeon-group.com/) - Company
 
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
-- Inspiration
-I've used this project as a learning project to learn even more about Terraform, AWS, and Ansible.
-Since these are the tools I use at work, I wanted to learn more about them. Setting it up with Terraform Cloud was also a fun challenge.
-
-- References
-I've used the following references to create this project:
-- [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
-- [morethancertified](https://courses.morethancertified.com)

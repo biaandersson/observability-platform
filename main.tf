@@ -23,7 +23,7 @@ resource "aws_instance" "mtc_main" {
   root_block_device {
     volume_size = var.main_vol_size
   }
-  
+
   tags = {
     Name = "mtc-main-${random_id.mtc_node_id[count.index].dec}"
   }
