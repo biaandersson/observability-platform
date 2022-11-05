@@ -17,6 +17,7 @@ resource "aws_instance" "mtc_main" {
   subnet_id              = aws_subnet.mtc_public_subnet[count.index].id
 
   provisioner "local-exec" {
+    // TODO: Add a check to see if an IP already exists and if so, remove it
     command = "printf '\n${self.public_ip}' >> ./aws_hosts && aws ec2 wait instance-status-ok --instance-ids ${self.id} && sleep 5"
   }
 
@@ -33,6 +34,10 @@ resource "null_resource" "install_grafana" {
   depends_on = [aws_instance.mtc_main]
 
   provisioner "local-exec" {
-    command = "ansible-playbook -i aws_hosts --key-file ~/.ssh/azureops -u ubuntu playbooks/grafana.yml"
+    command = "ansible-playbook -i aws_hosts --key-file ~/.ssh/azureops -u ubuntu playbooks/main-playbook.yml"
+  }
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -i aws_hosts --key-file ~/.ssh/azureops -u ubuntu playbooks/jenkins-playbook.yml"
   }
 }
