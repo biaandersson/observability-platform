@@ -31,3 +31,6 @@ override.tf.json
 # idea
 .idea/
 .vscode/
+
+# files
+aws_hosts
