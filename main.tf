@@ -16,9 +16,9 @@ resource "aws_instance" "mtc_main" {
   vpc_security_group_ids = [aws_security_group.mtc_security_group.id]
   subnet_id              = aws_subnet.mtc_public_subnet[count.index].id
 
-  user_data = templatefile("./scripts/userdata.sh", {
-    new_hostname = "mtc-main-${random_id.mtc_node_id[count.index].dec}"
-  })
+  provisioner "local-exec" {
+    command = "printf '\n${self.public_ip}' >> ./aws_hosts"
+  }
 
   root_block_device {
     volume_size = var.main_vol_size
@@ -26,5 +26,13 @@ resource "aws_instance" "mtc_main" {
 
   tags = {
     Name = "mtc-main-${random_id.mtc_node_id[count.index].dec}"
+  }
+}
+
+resource "null_resource" "install_grafana" {
+  depends_on = [aws_instance.mtc_main]
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -i aws_hosts --key-file ~/.ssh/azureops -u ubuntu playbooks/grafana.yml"
   }
 }
