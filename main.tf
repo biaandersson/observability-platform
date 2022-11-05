@@ -17,7 +17,7 @@ resource "aws_instance" "mtc_main" {
   subnet_id              = aws_subnet.mtc_public_subnet[count.index].id
 
   provisioner "local-exec" {
-    command = "printf '\n${self.public_ip}' >> ./aws_hosts"
+    command = "printf '\n${self.public_ip}' >> ./aws_hosts && aws ec2 wait instance-status-ok --instance-ids ${self.id} && sleep 5"
   }
 
   root_block_device {
