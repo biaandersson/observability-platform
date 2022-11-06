@@ -29,7 +29,7 @@ override.tf.json
 # example: *tfplan*
 
 # idea
-.idea/
+.idea
 .vscode/
 
 # files

@@ -14,9 +14,9 @@
       state: present
   - name: Install Jenkins and update apt cache
     ansible.builtin.apt:
+      update_cache: true
       name: jenkins
       state: present
-      update_cache: true
   - name: Start Jenkins and enable it
     ansible.builtin.systemd:
       name: jenkins

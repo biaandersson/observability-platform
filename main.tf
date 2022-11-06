@@ -34,10 +34,14 @@ resource "null_resource" "install_grafana" {
   depends_on = [aws_instance.mtc_main]
 
   provisioner "local-exec" {
-    command = "ansible-playbook -i aws_hosts --key-file ~/.ssh/azureops -u ubuntu playbooks/main-playbook.yml"
+    command = "sleep 20 && ansible-playbook -i aws_hosts --key-file ~/.ssh/azureops -u ubuntu playbooks/main-playbook.yml"
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook -i aws_hosts --key-file ~/.ssh/azureops -u ubuntu playbooks/jenkins-playbook.yml"
+    command = "sleep 10 && ansible-playbook -i aws_hosts --key-file ~/.ssh/azureops -u ubuntu playbooks/java-playbook.yml"
+  }
+
+  provisioner "local-exec" {
+    command = "sleep 10 && ansible-playbook -i aws_hosts --key-file ~/.ssh/azureops -u ubuntu playbooks/jenkins-playbook.yml"
   }
 }
