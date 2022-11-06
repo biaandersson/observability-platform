@@ -8,6 +8,6 @@ terraform {
 
 provider "aws" {
   region                   = "eu-north-1"
-  shared_credentials_files = [".aws_credentials"]
+  shared_credentials_files = ["~/.aws/credentials"]
 }
 
